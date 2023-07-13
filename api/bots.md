@@ -33,12 +33,48 @@ SDC Token
 ```
 {% endswagger-response %}
 
-{% swagger-response status="400: Bad Request" description="Формат ошибок" %}
-```javascript
+{% swagger-response status="400: Bad Request" description="Пропущен требуемый параметр" %}
+```json
 {
   "error": {
-    "msg": "Page not found",
-    "type": "NOT FOUND",
+    "msg": "<parameterName> parameter is missing",
+    "type": "MISSING_<parameter_name_snake_case>",
+    "code": 400
+  }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="400: Bad Request" description="Не правильно передан параметр" %}
+```json
+{
+  "error": {
+    "msg": "<parameterName> parameter is invalid",
+    "type": "INVALID_<parameter_name_snake_case>",
+    "code": 400
+  }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="403: Forbidden" description="Нет доступа" %}
+```json
+{
+  "error": {
+    "msg": "You do not have access to this action",
+    "type": "FORBIDDEN_ACTION",
+    "code": 403
+  }
+}
+```
+{% endswagger-response %}
+
+{% swagger-response status="404: Not Found" description="Бот не найден" %}
+```json
+{
+  "error": {
+    "msg": "<parameterName> entity not exist",
+    "type": "DOES_NOT_EXIST_<entity>",
     "code": 404
   }
 }
